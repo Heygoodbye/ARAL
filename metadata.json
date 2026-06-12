@@ -1,0 +1,6 @@
+{
+  "name": "Aral Mabna Ceram",
+  "description": "Premium landing page for Aral Mabna Ceram, specialized supplier of tiles, ceramics, and architectural building materials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
