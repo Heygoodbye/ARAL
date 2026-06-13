@@ -53,7 +53,9 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
     {
       number: "09128434389",
       label: "مدیریت فروش",
-      tel: "tel:09128434389"
+      tel: "tel:09128434389",
+      isWhatsapp: true,
+      whatsappUrl: "https://wa.me/+989128434389"
     }
   ];
 
@@ -114,7 +116,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                 {/* Weekdays */}
                 <div className="pl-3 flex flex-col gap-1 text-right">
                   <span className="text-[11px] text-gray-400 font-semibold">شنبه تا چهارشنبه</span>
-                  <div className="inline-flex items-center gap-1.5 justify-end" dir="ltr">
+                  <div className="flex items-center gap-1.5 justify-end w-full" dir="rtl">
                     <span className="font-mono text-xs sm:text-sm font-bold text-white">8:00</span>
                     <span className="font-sans text-[11px] text-gray-400 px-0.5">الی</span>
                     <span className="font-mono text-xs sm:text-sm font-bold text-white">15:00</span>
@@ -124,7 +126,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                 {/* Thursday */}
                 <div className="pr-3 flex flex-col gap-1 text-right">
                   <span className="text-[11px] text-gray-400 font-semibold">پنجشنبه</span>
-                  <div className="inline-flex items-center gap-1.5 justify-end" dir="ltr">
+                  <div className="flex items-center gap-1.5 justify-end w-full" dir="rtl">
                     <span className="font-mono text-xs sm:text-sm font-bold text-white">8:00</span>
                     <span className="font-sans text-[11px] text-gray-400 px-0.5">الی</span>
                     <span className="font-mono text-xs sm:text-sm font-bold text-white">13:00</span>
@@ -177,32 +179,49 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                       </div>
                     </div>
 
-                    {/* Quick Call & Copy Actions (optimized for touch 44px min height target, avoiding overflow) */}
+                    {/* Quick Call & Copy/WhatsApp Actions */}
                     <div className="flex items-center gap-1.5 shrink-0">
-                      {/* Copy Action */}
-                      <button
-                        onClick={() => handleCopy(item.number, idx)}
-                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all flex items-center justify-center relative cursor-pointer"
-                        title="کپی شماره"
-                      >
-                        {copiedIndex === idx ? (
-                          <Check className="w-4 h-4 text-emerald-500" />
-                        ) : (
-                          <Copy className="w-4 h-4" />
-                        )}
-                        <AnimatePresence>
-                          {copiedIndex === idx && (
-                            <motion.span
-                              initial={{ opacity: 0, y: 8, scale: 0.9 }}
-                              animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0 }}
-                              className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-emerald-500 text-white text-[9px] rounded font-sans whitespace-nowrap z-30"
-                            >
-                              کپی شد
-                            </motion.span>
+                      {/* Actions */}
+                      {item.isWhatsapp ? (
+                        <a
+                          href={item.whatsappUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] hover:scale-105 border border-[#25D366]/20 hover:border-[#25D366]/40 transition-all flex items-center justify-center relative cursor-pointer"
+                          title="ارسال پیام در واتساپ"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="w-5.5 h-5.5 fill-current"
+                          >
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.717-1.456L0 24zm6.59-4.846c1.6.95 3.588 1.455 5.416 1.456 5.4 0 9.794-4.392 9.797-9.794.001-2.618-1.01-5.08-2.863-6.934C17.132 2.025 14.673.99 12.01.99a9.78 9.78 0 0 0-9.805 9.8c-.001 1.947.5 3.849 1.45 5.518l-.999 3.644 3.73-.978h-.033zm11.302-6.818c-.31-.156-1.838-.908-2.126-1.012-.288-.105-.499-.156-.708.157-.21.314-.812 1.012-.996 1.218-.184.205-.367.23-.677.075-.309-.156-1.305-.48-2.486-1.533-.918-.818-1.538-1.829-1.719-2.143-.18-.314-.019-.484.135-.638.14-.139.31-.361.464-.541.154-.18.206-.31.309-.52.103-.21.052-.394-.026-.551-.077-.157-.708-1.705-.97-2.332-.255-.612-.513-.53-.708-.541-.182-.01-.392-.01-.601-.01-.208 0-.547.078-.833.391-.286.313-1.093 1.07-1.093 2.613 0 1.543 1.123 3.033 1.278 3.242.156.209 2.208 3.371 5.352 4.73.748.323 1.332.516 1.787.66.75.238 1.433.205 1.974.124.602-.09 1.838-.75 2.094-1.438.256-.688.256-1.278.18-1.438-.076-.16-.282-.255-.591-.411z" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => handleCopy(item.number, idx)}
+                          className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all flex items-center justify-center relative cursor-pointer"
+                          title="کپی شماره"
+                        >
+                          {copiedIndex === idx ? (
+                            <Check className="w-4 h-4 text-emerald-500" />
+                          ) : (
+                            <Copy className="w-4 h-4" />
                           )}
-                        </AnimatePresence>
-                      </button>
+                          <AnimatePresence>
+                            {copiedIndex === idx && (
+                              <motion.span
+                                initial={{ opacity: 0, y: 8, scale: 0.9 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-emerald-500 text-white text-[9px] rounded font-sans whitespace-nowrap z-30"
+                              >
+                                کپی شد
+                              </motion.span>
+                            )}
+                          </AnimatePresence>
+                        </button>
+                      )}
 
                       {/* Direct Click-to-Call Action */}
                       <a
