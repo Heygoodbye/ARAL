@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 // @ts-ignore
 import logoSvg from "../assets/images/logo.svg";
 // @ts-ignore
-import brandLogoPng from "../assets/images/photo_2026-06-12_22-33-06-removebg-preview.png";
+import brandLogoPng from "../assets/images/brand-logo.png";
 
 export default function Logo() {
   const [logoSrc, setLogoSrc] = useState(logoSvg);
