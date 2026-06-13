@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 // @ts-ignore
-import brandLogoPng from "../assets/images/brand-logo.png";
-
+import brandLogoPng from "../images/brand-logo.png";
 export default function Logo() {
   return (
     <motion.div
